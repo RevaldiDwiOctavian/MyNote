@@ -4,6 +4,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uas/constant.dart';
+import 'package:uas/views/screens/login/login_screen.dart';
 
 import 'background.dart';
 
@@ -39,7 +40,16 @@ class Body extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30)),
                   minimumSize: Size(size.width * 1, size.height * 0.01),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return LoginScreen();
+                      },
+                    ),
+                  );
+                },
                 child: Text("LOGIN"),
               ),
             ),
