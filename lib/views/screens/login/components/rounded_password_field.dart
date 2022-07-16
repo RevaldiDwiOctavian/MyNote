@@ -3,29 +3,44 @@ import 'package:uas/constant.dart';
 
 import 'text_field_container.dart';
 
-class RoundedPasswordField extends StatelessWidget {
+class RoundedPasswordField extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final String hintText;
-  const RoundedPasswordField({
+
+  RoundedPasswordField({
     Key? key,
     required this.onChanged,
     required this.hintText,
   }) : super(key: key);
 
   @override
+  State<RoundedPasswordField> createState() => _RoundedPasswordFieldState();
+}
+
+class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
+  late bool isObscure = true;
+
+  @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
         child: TextField(
-      obscureText: true,
+      obscureText: isObscure,
       decoration: InputDecoration(
-        hintText: hintText,
+        hintText: widget.hintText,
         icon: Icon(
           Icons.lock,
           color: kPrimaryColor,
         ),
-        suffixIcon: Icon(
-          Icons.visibility,
-          color: kPrimaryColor,
+        suffixIcon: GestureDetector(
+          child: Icon(
+            isObscure ? Icons.visibility : Icons.visibility_off,
+            color: kPrimaryColor,
+          ),
+          onTap: () {
+            setState(() {
+              isObscure = !isObscure;
+            });
+          },
         ),
         border: InputBorder.none,
       ),

@@ -42,10 +42,6 @@ class Body extends StatelessWidget {
             onChanged: (value) {},
             hintText: 'Password',
           ),
-          RoundedPasswordField(
-            onChanged: (value) {},
-            hintText: 'Confirm Password',
-          ),
           RoundedButton(
             color: kPrimaryColor,
             onPressed: () {},
