@@ -8,60 +8,79 @@ import 'package:uas/views/screens/auth/login/components/rounded_password_field.d
 import 'package:uas/views/screens/auth/login/login_screen.dart';
 import 'package:uas/views/screens/auth/signup/components/background.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Background(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Signup",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              "Signup",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
-          ),
-          SizedBox(height: size.height * 0.03),
-          SvgPicture.asset(
-            "assets/icons/signup.svg",
-            height: size.height * 0.35,
-          ),
-          SizedBox(height: size.height * 0.03),
-          RoundedInputField(
-            hintText: "Your email",
-            icon: Icons.person,
-            onChanged: (value) {},
-          ),
-          RoundedPasswordField(
-            onChanged: (value) {},
-            hintText: 'Password',
-          ),
-          RoundedButton(
-            color: kPrimaryColor,
-            onPressed: () {},
-            text: "SIGNUP",
-          ),
-          SizedBox(height: size.height * 0.03),
-          AlreadeyHaveAnAccountCheck(
-            login: false,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return LoginScreen();
-                  },
-                ),
-              );
-            },
-          ),
-        ],
+            SizedBox(height: size.height * 0.03),
+            SvgPicture.asset(
+              "assets/icons/signup.svg",
+              height: size.height * 0.35,
+            ),
+            SizedBox(height: size.height * 0.03),
+            RoundedInputField(
+              hintText: "Your Name",
+              icon: Icons.person,
+              onChanged: (value) {},
+              controller: nameController,
+            ),
+            RoundedInputField(
+              hintText: "Your email",
+              icon: Icons.mail,
+              onChanged: (value) {},
+              controller: emailController,
+            ),
+            RoundedPasswordField(
+              onChanged: (value) {},
+              hintText: 'Password',
+              controller: passwordController,
+            ),
+            RoundedButton(
+              color: kPrimaryColor,
+              onPressed: () {},
+              text: "SIGNUP",
+            ),
+            SizedBox(height: size.height * 0.03),
+            AlreadeyHaveAnAccountCheck(
+              login: false,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LoginScreen();
+                    },
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

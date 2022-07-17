@@ -13,6 +13,8 @@ class AddNote extends StatefulWidget {
 }
 
 class _AddNoteState extends State<AddNote> {
+  TextEditingController titleController = TextEditingController();
+  TextEditingController bodyController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,9 +30,11 @@ class _AddNoteState extends State<AddNote> {
               children: <Widget>[
                 Center(
                   child: RoundedInputField(
-                      hintText: "Title",
-                      icon: Icons.edit,
-                      onChanged: (value) {}),
+                    hintText: "Title",
+                    icon: Icons.edit,
+                    onChanged: (value) {},
+                    controller: titleController,
+                  ),
                 ),
                 Center(
                   child: Container(

@@ -13,6 +13,8 @@ class OpenNote extends StatefulWidget {
 }
 
 class _OpenNoteState extends State<OpenNote> {
+  TextEditingController titleController = TextEditingController();
+  TextEditingController bodyController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -28,9 +30,11 @@ class _OpenNoteState extends State<OpenNote> {
               children: <Widget>[
                 Center(
                   child: RoundedInputField(
-                      hintText: "Title",
-                      icon: Icons.edit,
-                      onChanged: (value) {}),
+                    hintText: "Title",
+                    icon: Icons.edit,
+                    onChanged: (value) {},
+                    controller: titleController,
+                  ),
                 ),
                 Center(
                   child: Container(
