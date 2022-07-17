@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uas/constant.dart';
-import 'package:uas/views/screens/login/components/already_have_an_account_check.dart';
-import 'package:uas/views/screens/login/components/rounded_button.dart';
-import 'package:uas/views/screens/login/components/rounded_input_field.dart';
-import 'package:uas/views/screens/login/components/rounded_password_field.dart';
-import 'package:uas/views/screens/login/login_screen.dart';
-import 'package:uas/views/screens/signup/components/background.dart';
+import 'package:uas/views/components/rounded_button.dart';
+import 'package:uas/views/components/rounded_input_field.dart';
+import 'package:uas/views/screens/auth/login/components/background.dart';
+import 'package:uas/views/screens/auth/signup/signup_screen.dart';
+import 'package:uas/views/screens/home.dart';
+
+import 'already_have_an_account_check.dart';
+import 'rounded_password_field.dart';
 
 class Body extends StatelessWidget {
   const Body({
@@ -21,22 +23,19 @@ class Body extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "Signup",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
+            "LOGIN",
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: size.height * 0.03),
           SvgPicture.asset(
-            "assets/icons/signup.svg",
-            height: size.height * 0.35,
+            "assets/icons/login.svg",
+            height: size.height * 0.4,
           ),
           SizedBox(height: size.height * 0.03),
           RoundedInputField(
             hintText: "Your email",
-            icon: Icons.person,
             onChanged: (value) {},
+            icon: Icons.person,
           ),
           RoundedPasswordField(
             onChanged: (value) {},
@@ -44,18 +43,25 @@ class Body extends StatelessWidget {
           ),
           RoundedButton(
             color: kPrimaryColor,
-            onPressed: () {},
-            text: "SIGNUP",
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Home(),
+                ),
+              );
+            },
+            text: "LOGIN",
           ),
           SizedBox(height: size.height * 0.03),
           AlreadeyHaveAnAccountCheck(
-            login: false,
+            login: true,
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return LoginScreen();
+                    return SignupScreen();
                   },
                 ),
               );

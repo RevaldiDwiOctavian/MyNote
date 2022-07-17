@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uas/constant.dart';
-import 'package:uas/views/screens/login/components/background.dart';
-import 'package:uas/views/screens/login/components/rounded_input_field.dart';
-import 'package:uas/views/screens/signup/signup_screen.dart';
-
-import 'already_have_an_account_check.dart';
-import 'rounded_button.dart';
-import 'rounded_password_field.dart';
+import 'package:uas/views/components/rounded_button.dart';
+import 'package:uas/views/components/rounded_input_field.dart';
+import 'package:uas/views/screens/auth/login/components/already_have_an_account_check.dart';
+import 'package:uas/views/screens/auth/login/components/rounded_password_field.dart';
+import 'package:uas/views/screens/auth/login/login_screen.dart';
+import 'package:uas/views/screens/auth/signup/components/background.dart';
 
 class Body extends StatelessWidget {
   const Body({
@@ -22,19 +21,22 @@ class Body extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "LOGIN",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            "Signup",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
           ),
           SizedBox(height: size.height * 0.03),
           SvgPicture.asset(
-            "assets/icons/login.svg",
-            height: size.height * 0.4,
+            "assets/icons/signup.svg",
+            height: size.height * 0.35,
           ),
           SizedBox(height: size.height * 0.03),
           RoundedInputField(
             hintText: "Your email",
-            onChanged: (value) {},
             icon: Icons.person,
+            onChanged: (value) {},
           ),
           RoundedPasswordField(
             onChanged: (value) {},
@@ -43,17 +45,17 @@ class Body extends StatelessWidget {
           RoundedButton(
             color: kPrimaryColor,
             onPressed: () {},
-            text: "LOGIN",
+            text: "SIGNUP",
           ),
           SizedBox(height: size.height * 0.03),
           AlreadeyHaveAnAccountCheck(
-            login: true,
+            login: false,
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return SignupScreen();
+                    return LoginScreen();
                   },
                 ),
               );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uas/constant.dart';
-import 'package:uas/views/screens/welcome/welcome_screen.dart';
+import 'package:uas/views/screens/auth/welcome/welcome_screen.dart';
+import 'package:uas/views/screens/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       title: 'Flutter Auth',
       theme: ThemeData(
         primaryColor: kPrimaryColor,

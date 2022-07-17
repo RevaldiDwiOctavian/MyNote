@@ -4,8 +4,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uas/constant.dart';
-import 'package:uas/views/screens/login/login_screen.dart';
-import 'package:uas/views/screens/signup/signup_screen.dart';
+import 'package:uas/views/screens/auth/login/login_screen.dart';
+import 'package:uas/views/screens/auth/signup/signup_screen.dart';
 
 import 'background.dart';
 
