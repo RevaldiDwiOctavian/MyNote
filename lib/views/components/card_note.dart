@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:uas/constant.dart';
 
 class CardNote extends StatelessWidget {
-  final String title;
+  final title;
   final open;
+  final delete;
   const CardNote({
     Key? key,
     required this.title,
     this.open,
+    this.delete,
   }) : super(key: key);
 
   @override
@@ -31,11 +33,17 @@ class CardNote extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              ElevatedButton.icon(
-                icon: Icon(Icons.visibility),
-                onPressed: open,
-                label: Text('Open'),
-              ),
+              Row(children: [
+                IconButton(
+                  icon: Icon(Icons.visibility),
+                  onPressed: open,
+                ),
+                SizedBox(width: 10),
+                IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: delete,
+                ),
+              ]),
             ],
           ),
         ],

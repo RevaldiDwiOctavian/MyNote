@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:sp_util/sp_util.dart';
 import 'package:uas/constant.dart';
 import 'package:uas/views/components/rounded_button.dart';
 import 'package:uas/views/components/rounded_input_field.dart';
@@ -13,6 +14,9 @@ class OpenPublicNote extends StatefulWidget {
 }
 
 class _OpenPublicNoteState extends State<OpenPublicNote> {
+  String user_id = SpUtil.getInt('user_id').toString();
+  String title = SpUtil.getString('title').toString();
+  String body = SpUtil.getString('body').toString();
   TextEditingController titleController = TextEditingController();
   TextEditingController bodyController = TextEditingController();
   @override
@@ -32,7 +36,9 @@ class _OpenPublicNoteState extends State<OpenPublicNote> {
                   child: RoundedInputField(
                     hintText: "Title",
                     icon: Icons.edit,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      title = value;
+                    },
                     controller: titleController,
                   ),
                 ),
@@ -46,6 +52,10 @@ class _OpenPublicNoteState extends State<OpenPublicNote> {
                       borderRadius: BorderRadius.circular(29),
                     ),
                     child: TextField(
+                      controller: bodyController,
+                      onChanged: (value) {
+                        body = value;
+                      },
                       maxLines: 30,
                       decoration: InputDecoration(
                         border: InputBorder.none,

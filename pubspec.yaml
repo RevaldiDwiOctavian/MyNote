@@ -38,7 +38,9 @@ dependencies:
   convex_bottom_bar: ^3.0.0
   rflutter_alert: ^2.0.4
   http: ^0.13.4
-  progress_dialog: ^1.2.4
+  flutter_easyloading: ^3.0.5
+  sp_util: ^2.0.3
+  flutter_switch: ^0.3.2
 
 dev_dependencies:
   flutter_test:

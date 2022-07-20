@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:sp_util/sp_util.dart';
 import 'package:uas/constant.dart';
 import 'package:uas/views/components/profile_info.dart';
 import 'package:uas/views/screens/mynote/add_note.dart';
@@ -39,7 +40,7 @@ class _HomeState extends State<Home> {
       body: Column(
         children: [
           ProfileInfo(
-            username: 'User Name',
+            username: SpUtil.getString("name"),
           ),
           widgets[currentIndex],
         ],

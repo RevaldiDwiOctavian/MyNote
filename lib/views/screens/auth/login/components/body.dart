@@ -1,13 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:sp_util/sp_util.dart';
+import 'package:uas/app_config.dart';
 import 'package:uas/constant.dart';
+import 'package:uas/models/login_model.dart';
 import 'package:uas/views/components/rounded_button.dart';
 import 'package:uas/views/components/rounded_input_field.dart';
 import 'package:uas/views/screens/auth/login/components/background.dart';
 import 'package:uas/views/screens/auth/signup/signup_screen.dart';
 import 'package:uas/views/screens/home.dart';
-import 'package:uas/api/api.dart';
 import 'package:http/http.dart' as http;
 
 import 'already_have_an_account_check.dart';
@@ -27,39 +32,61 @@ class _BodyState extends State<Body> {
   TextEditingController passwordController = TextEditingController();
   late String email, password;
 
-  login() async {
+  Future login() async {
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {
       Alert(
-              context: context,
-              title: "Error",
-              desc: "Please fill all field",
-              type: AlertType.error)
-          .show();
-    }
-    final response = await http.post(
-      Uri.parse('https://my-note-api.herokuapp.com/api/login'),
-      body: {
-        'email': emailController.text,
-        'password': passwordController.text,
-      },
-      headers: {
-        'Accept': 'application/json',
-      },
-    );
-    if (response.statusCode == 200) {
-      Alert(
-              context: context,
-              title: "Success",
-              desc: "Login Success",
-              type: AlertType.success)
-          .show();
+        context: context,
+        title: "Error",
+        desc: "Please fill all field",
+      ).show();
     } else {
-      Alert(
-              context: context,
-              title: "Error",
-              desc: "Login Failed",
-              type: AlertType.error)
-          .show();
+      EasyLoading.show(status: "Loading...");
+      final response = await http.post(
+        Uri.parse(AppConfig.apiUrl() + 'login'),
+        body: {
+          'email': emailController.text,
+          'password': passwordController.text,
+        },
+        headers: {
+          'Accept': 'application/json',
+        },
+      );
+      EasyLoading.dismiss();
+      if (response.statusCode == 200) {
+        final LoginModel = loginModelFromJson(response.body);
+        SpUtil.putString("token", LoginModel.accessToken);
+        SpUtil.putString("name", LoginModel.data.name);
+        SpUtil.putInt("user_id", LoginModel.data.id);
+        SpUtil.putBool("isLogin", true);
+        Alert(
+          context: context,
+          title: "Success",
+          desc: "Login Success",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "OK",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Home(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ).show();
+      } else {
+        Alert(
+          context: context,
+          title: "Error",
+          desc: "Email or Password is wrong",
+        ).show();
+      }
     }
   }
 
